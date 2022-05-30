@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		572319162844EF18009F49AC /* AppMain in Frameworks */ = {isa = PBXBuildFile; productRef = 572319152844EF18009F49AC /* AppMain */; };
 		57E351B02842EC2A00E95229 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E351AF2842EC2A00E95229 /* AppDelegate.swift */; };
-		57E351B42842EC2A00E95229 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E351B32842EC2A00E95229 /* ViewController.swift */; };
 		57E351B92842EC2A00E95229 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57E351B82842EC2A00E95229 /* Assets.xcassets */; };
 		57E351BC2842EC2A00E95229 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57E351BA2842EC2A00E95229 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -33,7 +33,6 @@
 /* Begin PBXFileReference section */
 		57E351AC2842EC2A00E95229 /* todo-mvvm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "todo-mvvm.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		57E351AF2842EC2A00E95229 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		57E351B32842EC2A00E95229 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		57E351B82842EC2A00E95229 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		57E351BB2842EC2A00E95229 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		57E351BD2842EC2A00E95229 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -46,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				572319162844EF18009F49AC /* AppMain in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,11 +66,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		572319122844EDEA009F49AC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		57E351A32842EC2900E95229 = {
 			isa = PBXGroup;
 			children = (
 				57E351AE2842EC2A00E95229 /* todo-mvvm */,
 				57E351AD2842EC2A00E95229 /* Products */,
+				572319122844EDEA009F49AC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -88,7 +96,6 @@
 			isa = PBXGroup;
 			children = (
 				57E351AF2842EC2A00E95229 /* AppDelegate.swift */,
-				57E351B32842EC2A00E95229 /* ViewController.swift */,
 				57E351B82842EC2A00E95229 /* Assets.xcassets */,
 				57E351BA2842EC2A00E95229 /* LaunchScreen.storyboard */,
 				57E351BD2842EC2A00E95229 /* Info.plist */,
@@ -112,6 +119,9 @@
 			dependencies = (
 			);
 			name = "todo-mvvm";
+			packageProductDependencies = (
+				572319152844EF18009F49AC /* AppMain */,
+			);
 			productName = "todo-mvvm";
 			productReference = 57E351AC2842EC2A00E95229 /* todo-mvvm.app */;
 			productType = "com.apple.product-type.application";
@@ -226,7 +236,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				57E351B42842EC2A00E95229 /* ViewController.swift in Sources */,
 				57E351B02842EC2A00E95229 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -550,6 +559,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		572319152844EF18009F49AC /* AppMain */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AppMain;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 57E351A42842EC2900E95229 /* Project object */;
 }

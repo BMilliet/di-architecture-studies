@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:packages/AppHome">
+   </FileRef>
+   <FileRef
+      location = "group:packages/AppLogin">
+   </FileRef>
+   <FileRef
+      location = "group:packages/AppMain">
+   </FileRef>
+   <FileRef
+      location = "container:todo-mvvm/todo-mvvm.xcodeproj">
+   </FileRef>
+</Workspace>
