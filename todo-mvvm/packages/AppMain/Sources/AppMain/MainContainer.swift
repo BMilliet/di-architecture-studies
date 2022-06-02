@@ -2,7 +2,10 @@ import AppLogin
 import AppHome
 
 public final class MainContainer {
-    public init() {}
+    
+    public init() {
+        
+    }
     
     public func makeMainViewController() -> MainViewController {
         return MainViewController(
@@ -22,7 +25,9 @@ public final class MainContainer {
     }
     
     func makeLoginViewController() -> LoginViewController {
-        let container = LoginContainer()
+        let container = LoginContainer(
+            homeViewControllerFactory: { return self.makeHomeViewController() }
+        )
         return container.makeLoginViewController()
     }
 }

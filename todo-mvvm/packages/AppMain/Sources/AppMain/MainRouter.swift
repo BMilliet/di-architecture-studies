@@ -1,10 +1,9 @@
-import UIKit
-import AppLogin
-import AppHome
+import Foundation
 import Combine
+import AppHome
+import AppLogin
 
-public class MainViewController: UIViewController {
-    
+public final class MainRouter {
     private let viewModel: MainViewModel
     
     private var homeViewController: HomeViewController?
@@ -15,7 +14,6 @@ public class MainViewController: UIViewController {
     
     private var subscriptions = Set<AnyCancellable>()
     
-    required init?(coder: NSCoder) { return nil }
     init(
         viewModel: MainViewModel,
         homeViewControllerFactory: @escaping () -> HomeViewController,
@@ -24,10 +22,7 @@ public class MainViewController: UIViewController {
         self.viewModel = viewModel
         self.makeHomeViewController = homeViewControllerFactory
         self.makeLoginViewController = loginViewControllerFactory
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    public override func viewDidLoad() {
+        
         observeState()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [self] in
@@ -46,13 +41,13 @@ public class MainViewController: UIViewController {
     
     func goToLogin() {
         self.loginViewController = makeLoginViewController()
-        self.navigationController?.pushViewController(loginViewController!, animated: true)
+        //self.navigationController?.pushViewController(loginViewController!, animated: true)
     }
     
     func stateAction(_ state: MainViewState) {
         switch state {
         case .launching:
-            view.backgroundColor = .cyan
+            print("aa")
         case .home:
             goToHome()
         case .login:
@@ -60,7 +55,7 @@ public class MainViewController: UIViewController {
         }
     }
     
-    func subscribe(to publisher: AnyPublisher<MainViewState, Never>) {
+    private func subscribe(to publisher: AnyPublisher<MainViewState, Never>) {
         publisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] state in
@@ -70,7 +65,7 @@ public class MainViewController: UIViewController {
             .store(in: &subscriptions)
     }
     
-    func observeState() {
+    private func observeState() {
         let publisher = viewModel.$state.removeDuplicates().eraseToAnyPublisher()
         subscribe(to: publisher)
     }
