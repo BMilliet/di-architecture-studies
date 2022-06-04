@@ -7,11 +7,16 @@ enum MainViewState {
 final class MainViewModel {
     @Published public private(set) var state: MainViewState = .launching
     
-    func notSignedIn() {
+    func validateState() {
+        notSignedIn()
+        //signedIn()
+    }
+    
+    private func notSignedIn() {
         state = .login
     }
     
-    func signedIn() {
+    private func signedIn() {
         state = .home
     }
 }

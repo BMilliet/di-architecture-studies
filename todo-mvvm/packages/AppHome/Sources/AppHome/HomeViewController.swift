@@ -7,15 +7,9 @@ public class HomeViewController: UIViewController {
     init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        print("Init!")
     }
     
     public override func viewDidLoad() {
-        print("did load")
         view.backgroundColor = .purple
-    }
-    
-    deinit {
-        print("deinit!")
     }
 }

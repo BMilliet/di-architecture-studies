@@ -29,24 +29,17 @@ public class MainViewController: UIViewController {
     
     public override func viewDidLoad() {
         observeState()
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [self] in
-            print("changed state")
-            //viewModel.signedIn()
-            viewModel.notSignedIn()
-        }
+        viewModel.validateState()
     }
     
     private func goToHome() {
         self.homeViewController = makeHomeViewController()
-        homeViewController?.modalPresentationStyle = .fullScreen
-        self.homeViewController?.present(homeViewController!, animated: false)
-        //self.navigationController?.pushViewController(homeViewController!, animated: true)
+        navigationController?.pushViewController(homeViewController!, animated: false)
     }
     
     func goToLogin() {
         self.loginViewController = makeLoginViewController()
-        self.navigationController?.pushViewController(loginViewController!, animated: true)
+        navigationController?.pushViewController(loginViewController!, animated: false)
     }
     
     func stateAction(_ state: MainViewState) {
