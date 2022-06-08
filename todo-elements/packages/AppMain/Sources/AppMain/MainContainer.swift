@@ -1,22 +1,22 @@
 import AppLogin
 import AppHome
+import Combine
 
 public final class MainContainer {
     
-    public init() {
-        
-    }
+    public init() {}
     
     public func makeMainViewController() -> MainViewController {
-        return MainViewController(
-            viewModel: makeMainViewModel(),
+        let observer = makeMainObserver()
+        
+        let controller = MainViewController(
+            observer: observer,
             homeViewControllerFactory: { return self.makeHomeViewController() },
             loginViewControllerFactory: { return self.makeLoginViewController() }
         )
-    }
-    
-    func makeMainViewModel() -> MainViewModel {
-        return MainViewModel()
+        
+        observer.eventReponder = controller
+        return controller
     }
     
     func makeHomeViewController() -> HomeViewController {
@@ -29,5 +29,13 @@ public final class MainContainer {
             homeViewControllerFactory: { return self.makeHomeViewController() }
         )
         return container.makeLoginViewController()
+    }
+    
+    func makeMainObserver() -> MainObserver {
+        return MainObserver(appState: makeAppStatePublisher())
+    }
+    
+    func makeAppStatePublisher() -> AnyPublisher<MainViewState, Never> {
+        return Just(MainViewState.launching).eraseToAnyPublisher()
     }
 }

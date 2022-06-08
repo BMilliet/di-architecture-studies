@@ -2,10 +2,11 @@ import UIKit
 import AppLogin
 import AppHome
 import Combine
+import AppUtils
 
 public class MainViewController: UIViewController {
     
-    private let viewModel: MainViewModel
+    private let observer: Observer
     
     private var homeViewController: HomeViewController?
     private var loginViewController: LoginViewController?
@@ -17,19 +18,18 @@ public class MainViewController: UIViewController {
     
     required init?(coder: NSCoder) { return nil }
     init(
-        viewModel: MainViewModel,
+        observer: Observer,
         homeViewControllerFactory: @escaping () -> HomeViewController,
         loginViewControllerFactory: @escaping () -> LoginViewController
     ) {
-        self.viewModel = viewModel
+        self.observer = observer
         self.makeHomeViewController = homeViewControllerFactory
         self.makeLoginViewController = loginViewControllerFactory
         super.init(nibName: nil, bundle: nil)
     }
     
     public override func viewDidLoad() {
-        observeState()
-        viewModel.validateState()
+        observer.startObserving()
     }
     
     private func goToHome() {
@@ -52,19 +52,10 @@ public class MainViewController: UIViewController {
             goToLogin()
         }
     }
-    
-    func subscribe(to publisher: AnyPublisher<MainViewState, Never>) {
-        publisher
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] state in
-                guard let strongSelf = self else { return }
-                strongSelf.stateAction(state)
-            }
-            .store(in: &subscriptions)
-    }
-    
-    func observeState() {
-        let publisher = viewModel.$state.removeDuplicates().eraseToAnyPublisher()
-        subscribe(to: publisher)
+}
+
+extension MainViewController: MainObserverResponder {
+    func navigationState(state: MainViewState) {
+        stateAction(state)
     }
 }
