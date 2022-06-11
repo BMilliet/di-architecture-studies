@@ -2,20 +2,20 @@ import AppUtils
 
 class LoginAppUseCase: UseCase {
     
+    private let actionDispatcher: ActionDispatcher
     private let password: String
     
-    init(password: String) {
+    init(actionDispatcher: ActionDispatcher, password: String) {
+        self.actionDispatcher = actionDispatcher
         self.password = password
     }
     
     func start() {
         print("useCase => \(password)")
         if password == "123" {
-            // success
-            // actionDispatcher.dispatch
+            actionDispatcher.dispatch(LoginSuccessAction())
         } else {
-            // error
-            // actionDispatcher.dispatch
+            actionDispatcher.dispatch(LoginFailureAction())
         }
     }
 }

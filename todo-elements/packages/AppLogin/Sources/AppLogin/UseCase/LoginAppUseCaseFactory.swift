@@ -1,5 +1,5 @@
-final class LoginAppUseCaseFactory {
-    func makeLoginAppUseCase(password: String) -> LoginAppUseCase {
-        return LoginAppUseCase(password: password)
-    }
+import AppUtils
+
+protocol LoginAppUseCaseFactory {
+    func makeLoginAppUseCase(password: String) -> LoginAppUseCase
 }

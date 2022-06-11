@@ -1,6 +1,7 @@
 import AppHome
 import UIKit
 import Combine
+import AppUtils
 
 public final class LoginContainer {
     
@@ -19,7 +20,7 @@ public final class LoginContainer {
         let controller = LoginViewController(
             observer: observer,
             userInterface: userInterface,
-            loginAppUseCaseFactory: makeLoginAppUseCaseFactory(),
+            loginAppUseCaseFactory: self,
             homeViewControllerFactory: makeHomeViewController
         )
         
@@ -30,14 +31,19 @@ public final class LoginContainer {
     }
     
     private func makeLoginObserver() -> LoginObserver {
-        return LoginObserver(appState: makeLoginStatePublisher())
+        return LoginObserver()
     }
     
-    private func makeLoginStatePublisher() -> AnyPublisher<LoginViewState, Never> {
-        return Just(LoginViewState.empty).eraseToAnyPublisher()
-    }
-    
-    private func makeLoginAppUseCaseFactory() -> LoginAppUseCaseFactory {
-        return LoginAppUseCaseFactory()
+//    private func makeLoginStatePublisher() -> AnyPublisher<LoginViewState, Never> {
+//        return Just(LoginViewState.empty).eraseToAnyPublisher()
+//    }
+}
+
+extension LoginContainer: LoginAppUseCaseFactory {
+    func makeLoginAppUseCase(password: String) -> LoginAppUseCase {
+        return LoginAppUseCase(
+            actionDispatcher: ActionDispatcher(),
+            password: password
+        )
     }
 }
