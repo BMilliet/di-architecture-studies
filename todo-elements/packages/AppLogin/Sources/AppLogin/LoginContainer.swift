@@ -1,5 +1,6 @@
 import AppHome
 import UIKit
+import Combine
 
 public final class LoginContainer {
     
@@ -12,13 +13,31 @@ public final class LoginContainer {
     }
     
     public func makeLoginViewController() -> LoginViewController {
-        return LoginViewController(
-            viewModel: makeLoginViewModel(),
+        let observer = makeLoginObserver()
+        let userInterface = LoginView()
+        
+        let controller = LoginViewController(
+            observer: observer,
+            userInterface: userInterface,
+            loginAppUseCaseFactory: makeLoginAppUseCaseFactory(),
             homeViewControllerFactory: makeHomeViewController
         )
+        
+        observer.eventReponder = controller
+        userInterface.ixResponder = controller
+        
+        return controller
     }
     
-    func makeLoginViewModel() -> LoginViewModel {
-        return LoginViewModel()
+    private func makeLoginObserver() -> LoginObserver {
+        return LoginObserver(appState: makeLoginStatePublisher())
+    }
+    
+    private func makeLoginStatePublisher() -> AnyPublisher<LoginViewState, Never> {
+        return Just(LoginViewState.empty).eraseToAnyPublisher()
+    }
+    
+    private func makeLoginAppUseCaseFactory() -> LoginAppUseCaseFactory {
+        return LoginAppUseCaseFactory()
     }
 }

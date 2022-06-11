@@ -7,14 +7,13 @@ import AppUtils
 public class MainViewController: UIViewController {
     
     private let observer: Observer
+    private var subscriptions = Set<AnyCancellable>()
     
     private var homeViewController: HomeViewController?
     private var loginViewController: LoginViewController?
     
     private let makeHomeViewController: () -> HomeViewController
     private let makeLoginViewController: () -> LoginViewController
-    
-    private var subscriptions = Set<AnyCancellable>()
     
     required init?(coder: NSCoder) { return nil }
     init(

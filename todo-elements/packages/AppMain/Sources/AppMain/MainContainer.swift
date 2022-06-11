@@ -36,6 +36,6 @@ public final class MainContainer {
     }
     
     func makeAppStatePublisher() -> AnyPublisher<MainViewState, Never> {
-        return Just(MainViewState.launching).eraseToAnyPublisher()
+        return Just(MainViewState.login).eraseToAnyPublisher()
     }
 }
